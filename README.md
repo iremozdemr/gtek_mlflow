@@ -22,7 +22,7 @@ Below is an example of how to use the `train_model` function from the package wi
 
 ```python
 import tensorflow as tf
-from your_package_name import train_model  # Replace with your package name
+from gtek_mlflow import training
 
 # Define a sample data generator
 def generate_data():

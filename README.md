@@ -15,6 +15,7 @@ To install the package, use `pip`:
 
 ```bash
 pip install gtek_mlflow
+```
 
 ## Example Usage
 
@@ -58,3 +59,4 @@ train_model(
     loss_function='mse',
     metrics=['mae', 'mse']
 )
+```

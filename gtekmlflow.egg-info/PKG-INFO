@@ -1,9 +1,9 @@
 Metadata-Version: 2.1
-Name: gtek_mlflow
-Version: 0.1
+Name: gtekmlflow
+Version: 0.2
 Summary: a general-purpose python package with MLflow integration
-Home-page: https://github.com/iremozdemr/gtek_mlflow
-Download-URL: https://github.com/iremozdemr/gtek_mlflow/archive/refs/tags/0.1.tar.gz
+Home-page: https://github.com/iremozdemr/gtekmlflow
+Download-URL: https://github.com/iremozdemr/gtekmlflow/archive/refs/tags/0.1.tar.gz
 Author: irem ozdemir
 Author-email: iremozdemirwww3@gmail.com
 License: MIT

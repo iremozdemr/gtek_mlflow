@@ -23,7 +23,7 @@ Below is an example of how to use the `train_model` function from the package wi
 
 ```python
 import tensorflow as tf
-from gtek_mlflow import training
+from gtekmlflow import training
 
 # Define a sample data generator
 def generate_data():
@@ -48,7 +48,7 @@ train_dataset = tf.data.Dataset.from_generator(
 test_dataset = train_dataset.take(10)
 
 # Train the model using the train_model function
-train_model(
+training(
     experiment_name='Satellite_Wind_Prediction',
     train_generator=train_dataset,
     test_generator=test_dataset,

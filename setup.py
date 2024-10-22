@@ -1,9 +1,9 @@
 from setuptools import find_packages, setup
 
 setup(
-    name='gtek_mlflow',
-    packages=find_packages(include=['gtek_mlflow']),
-    version='0.1',
+    name='gtekmlflow',
+    packages=find_packages(include=['gtekmlflow']),
+    version='0.2',
     license='MIT',    
     description='a general-purpose python package with MLflow integration',
     author='irem ozdemir',
@@ -13,6 +13,6 @@ setup(
         'mlflow>=1.21.0', 
         'tensorflow>=2.5.0',  
     ],
-    url = '', 
-    download_url = '',
+    url = 'https://github.com/iremozdemr/gtekmlflow', 
+    download_url = 'https://github.com/iremozdemr/gtekmlflow/archive/refs/tags/0.1.tar.gz',
 )

@@ -1,2 +1,0 @@
-mlflow>=1.21.0
-tensorflow>=2.5.0

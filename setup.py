@@ -13,6 +13,6 @@ setup(
         'mlflow>=1.21.0', 
         'tensorflow>=2.5.0',  
     ],
-    # url = 'https://github.com/iremozdemr/gtekmlflow', 
-    # download_url = 'https://github.com/iremozdemr/gtekmlflow/archive/refs/tags/0.2.tar.gz',
+    url = 'https://github.com/iremozdemr/mlflowlib', 
+    download_url = 'https://github.com/iremozdemr/mlflowlib/archive/refs/tags/0.2.tar.gz',
 )

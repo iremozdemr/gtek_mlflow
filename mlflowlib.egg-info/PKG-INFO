@@ -1,9 +1,9 @@
 Metadata-Version: 2.1
 Name: mlflowlib
-Version: 0.2
+Version: 0.3
 Summary: a general-purpose python package with MLflow integration
 Home-page: https://github.com/iremozdemr/mlflowlib
-Download-URL: https://github.com/iremozdemr/mlflowlib/archive/refs/tags/0.2.tar.gz
+Download-URL: https://github.com/iremozdemr/mlflowlib/archive/refs/tags/0.3.tar.gz
 Author: irem ozdemir
 Author-email: iremozdemirwww3@gmail.com
 License: MIT

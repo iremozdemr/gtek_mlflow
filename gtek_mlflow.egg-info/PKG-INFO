@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: gtek_mlflow
+Version: 0.1
+Summary: a general-purpose python package with MLflow integration
+Home-page: 
+Download-URL: 
+Author: irem ozdemir
+Author-email: iremozdemirwww3@gmail.com
+License: MIT
+Keywords: ["machine learning","deep learning","mlflow","tensorflow","model training"]
+License-File: LICENSE.txt
+Requires-Dist: mlflow>=1.21.0
+Requires-Dist: tensorflow>=2.5.0

@@ -73,7 +73,7 @@ class LossAndErrorPrintingCallback(Callback):
 # Genel model egitim fonksiyonu
 def train_model(
     experiment_name,  # Varsayilan deney adi
-    tracking_uri="http://192.168.13.79:5000",  # Varsayilan olarak yerel bir MLflow sunucusu
+    tracking_uri="http://your_mlflow_server_uri:5000",  # Varsayilan olarak yerel bir MLflow sunucusu
     batch_size=32,  # Varsayilan batch boyutu
     epochs=100,  # Varsayilan epoch sayisi
     device='/CPU:0',  # Varsayilan olarak CPU'da calistirilir

@@ -7,8 +7,8 @@
 
 import mlflow
 import tensorflow as tf
-from tensorflow.keras import Input, Model
-from tensorflow.keras.layers import Conv3D, Flatten, Concatenate, Dense, Reshape
+# from tensorflow.keras import Input, Model
+# from tensorflow.keras.layers import Conv3D, Flatten, Concatenate, Dense, Reshape
 from tensorflow.keras.callbacks import Callback
 import time
 
@@ -51,44 +51,43 @@ def train_model(
     experiment_name='using mlflowlib',
     batch_size=32,
     epochs=7,
-    steps_per_epoch=None,  # steps_per_epoch artık manuel olarak sağlanacak
     device='/CPU:0',
-    input_image_shape=(8, 670, 1413, 3),
-    turbine_total_count=100,
-    train_generator=None,
-    test_generator=None,
-    callbacks=None,
-    optimizer='adam',
-    loss_function='mse',
-    metrics=['mae', 'mape', 'mse']
+    # input_image_shape=(8, 670, 1413, 3),
+    # turbine_total_count=100,
+    # train_generator=None,
+    # test_generator=None,
+    # callbacks=None,
+    # optimizer='adam',
+    # loss_function='mse',
+    # metrics=['mae', 'mape', 'mse'],
+    # steps_per_epoch=None,  
+    model=None
 ):
     """
-    Function for training a model using MLflow and TensorFlow. Performs the entire
-    model training and logging with a single function call.
-
     Args:
-        run_name (str): Name of the run in MLflow.
-        tracking_uri (str, optional): MLflow tracking URI. Default 'http://your_mlflow_server_uri:5000'.
-        experiment_name (str, optional): Name of the experiment in MLflow. Default 'using mlflowlib'.
-        batch_size (int, optional): Batch size for training. Default 32.
-        epochs (int, optional): Number of epochs for training. Default 7.
-        steps_per_epoch (int, optional): Number of steps per epoch. Required.
-        device (str, optional): Device to be used for training. Default 'CPU:0'.
-        input_image_shape (tuple, optional): Shape of the input image. Default (8, 670, 1413, 3).
-        turbine_total_count (int, optional): Total number of turbines. Default 100.
-        train_generator (tf.data.Dataset): Training data generator. Required.
-        test_generator (tf.data.Dataset): Test data generator. Required.
-        callbacks (list, optional): List of custom callbacks. Default callbacks: `LearningRateLogger`, `LossAndErrorPrintingCallback`, and `ProgressLogger`.
-        optimizer (str, optional): Optimizer to be used. Default 'adam'.
-        loss_function (str, optional): Loss function. Default 'mse'.
-        metrics (list, optional): Metrics to be used during training. Default ['mae', 'mape', 'mse'].
-    
+        run_name (str): Name of the run in MLflow. This is used to distinguish different 
+                        model training sessions within the same experiment.
+        tracking_uri (str, optional): MLflow tracking URI. This is the URI where the MLflow 
+                                      server is hosted. Defaults to "http://your_mlflow_server_uri:5000".
+        experiment_name (str, optional): Name of the experiment in MLflow. If it does not exist, 
+                                         it will be created. Defaults to 'using mlflowlib'.
+        batch_size (int, optional): Size of batches during training. Determines how many samples 
+                                    will be processed before updating the model weights. 
+                                    Defaults to 32.
+        epochs (int, optional): Number of epochs for training. An epoch is one full cycle through 
+                                the entire training dataset. Defaults to 7.
+        device (str, optional): The device to use for training the model. If a GPU is available, 
+                                set this to '/GPU:0'. For CPU, use '/CPU:0'. Defaults to '/CPU:0'.
+        model (tf.keras.Model, optional): The Keras model object that will be trained. This model 
+                                          should be compiled with an optimizer, loss function, and 
+                                          metrics before being passed into this function. Defaults to None.
+
     Returns:
-        None
+        None. The function logs all relevant metrics and the model to MLflow during and after training.
     """
 
-    if steps_per_epoch is None:
-        raise ValueError("steps_per_epoch must be provided when dataset length is unknown.")
+    # if steps_per_epoch is None:
+    #     raise ValueError("steps_per_epoch must be provided when dataset length is unknown.")
 
     # Set up MLflow
     mlflow.set_tracking_uri(tracking_uri)
@@ -100,43 +99,53 @@ def train_model(
 
         with tf.device(device):
             # Create input layers
-            input_images = Input(shape=input_image_shape, name='image_input')
+            # input_images = Input(shape=input_image_shape, name='image_input')
 
-            x = Conv3D(64, kernel_size=(3, 3, 3), strides=(4,4,4), activation='relu', padding='same')(input_images)
-            x = Conv3D(32, kernel_size=(3, 3, 3), strides=(4,4,4), activation='relu', padding='same')(x)
-            x = Conv3D(16, kernel_size=(3, 3, 3), strides=(4,4,4), activation='relu', padding='same')(x)
-            x = Flatten()(x)
+            # x = Conv3D(64, kernel_size=(3, 3, 3), strides=(4,4,4), activation='relu', padding='same')(input_images)
+            # x = Conv3D(32, kernel_size=(3, 3, 3), strides=(4,4,4), activation='relu', padding='same')(x)
+            # x = Conv3D(16, kernel_size=(3, 3, 3), strides=(4,4,4), activation='relu', padding='same')(x)
+            # x = Flatten()(x)
 
-            input_wind_speeds = Input(shape=(turbine_total_count, 24), name='wind_speed_input')
-            flattened_wind_speeds = Flatten()(input_wind_speeds)
+            # input_wind_speeds = Input(shape=(turbine_total_count, 24), name='wind_speed_input')
+            # flattened_wind_speeds = Flatten()(input_wind_speeds)
 
-            combined = Concatenate()([x, flattened_wind_speeds])
+            # combined = Concatenate()([x, flattened_wind_speeds])
 
-            combined = Dense(128, activation='relu')(combined)
-            combined = Dense(64, activation='relu')(combined)
+            # combined = Dense(128, activation='relu')(combined)
+            # combined = Dense(64, activation='relu')(combined)
 
-            output = Dense(turbine_total_count * 24, activation='linear')(combined)
-            output = Reshape((turbine_total_count, 24))(output)
+            # output = Dense(turbine_total_count * 24, activation='linear')(combined)
+            # output = Reshape((turbine_total_count, 24))(output)
 
-            model = Model(inputs=[input_images, input_wind_speeds], outputs=output)
+            # model = Model(inputs=[input_images, input_wind_speeds], outputs=output)
 
-            model.compile(optimizer=optimizer, loss=loss_function, metrics=metrics)
+            # model.compile(optimizer=optimizer, loss=loss_function, metrics=metrics)
 
             # Default Callbacks if none provided
-            if callbacks is None:
-                lr_logger_callback = LearningRateLogger()
-                get_metrics_callback = LossAndErrorPrintingCallback()
-                progress_logger_callback = ProgressLogger()
-                callbacks = [lr_logger_callback, get_metrics_callback, progress_logger_callback]
+            # if callbacks is None:
+            #     lr_logger_callback = LearningRateLogger()
+            #     get_metrics_callback = LossAndErrorPrintingCallback()
+            #     progress_logger_callback = ProgressLogger()
+            #     callbacks = [lr_logger_callback, get_metrics_callback, progress_logger_callback]
 
             # Train the model
-            model.fit(
-                train_generator,
-                epochs=epochs,
-                steps_per_epoch=steps_per_epoch,  # Manuel olarak sağlanan steps_per_epoch kullanılıyor
-                validation_data=test_generator,
-                callbacks=callbacks
-            )
+            # model.fit(
+            #     train_generator,
+            #     epochs=epochs,
+            #     steps_per_epoch=steps_per_epoch,  # Manuel olarak sağlanan steps_per_epoch kullanılıyor
+            #     validation_data=test_generator,
+            #     callbacks=callbacks
+            # )
 
             # Log the model to MLflow
+            
             mlflow.keras.log_model(model, "model")
+
+            print("####################")
+            print("run info: ")
+            print("####################")
+            print("run id: ",run.info.run_id)
+            print("start time:",run.info.start_time)
+            print("end time:",run.info.end_time)
+            print("status:",run.info.status)
+            print("status:",run.info._user_id)

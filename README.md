@@ -86,7 +86,7 @@ model = create_model()
 # Call the train_model function to train the model
 training.train_model(
     run_name="example_run",
-    tracking_uri="http://192.168.13.79:5000",
+    tracking_uri="",
     experiment_name="Wind_Turbine_Prediction",
     batch_size=32,
     epochs=5,
@@ -100,7 +100,7 @@ from mlflowlib import train_model
 
 training.train_model(
     run_name="example_run",
-    tracking_uri="http://192.168.13.79:5000",
+    tracking_uri="",
     experiment_name="Wind_Turbine_Prediction",
     batch_size=32,
     epochs=5,

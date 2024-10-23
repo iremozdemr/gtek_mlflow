@@ -40,8 +40,9 @@ class ProgressLogger(Callback):
         print(f"Progress: {progress:.2f}% completed.")
 
     def on_batch_end(self, batch, logs=None):
-        progress = ((batch+1) / self.params['steps']) * 100
-        print(f"Batch {batch+1}/{self.params['steps']} - {progress:.2f}% completed.")
+        steps = self.params['steps']
+        progress = ((batch+1) / steps) * 100 if steps else 0
+        print(f"Batch {batch+1}/{steps} - {progress:.2f}% completed.")
 
 # General model training function
 def train_model(
@@ -50,6 +51,7 @@ def train_model(
     experiment_name='using mlflowlib',
     batch_size=32,
     epochs=7,
+    steps_per_epoch=None,  # steps_per_epoch artık manuel olarak sağlanacak
     device='/CPU:0',
     input_image_shape=(8, 670, 1413, 3),
     turbine_total_count=100,
@@ -70,6 +72,7 @@ def train_model(
         experiment_name (str, optional): Name of the experiment in MLflow. Default 'using mlflowlib'.
         batch_size (int, optional): Batch size for training. Default 32.
         epochs (int, optional): Number of epochs for training. Default 7.
+        steps_per_epoch (int, optional): Number of steps per epoch. Required.
         device (str, optional): Device to be used for training. Default 'CPU:0'.
         input_image_shape (tuple, optional): Shape of the input image. Default (8, 670, 1413, 3).
         turbine_total_count (int, optional): Total number of turbines. Default 100.
@@ -83,6 +86,9 @@ def train_model(
     Returns:
         None
     """
+
+    if steps_per_epoch is None:
+        raise ValueError("steps_per_epoch must be provided when dataset length is unknown.")
 
     # Set up MLflow
     mlflow.set_tracking_uri(tracking_uri)
@@ -127,7 +133,7 @@ def train_model(
             model.fit(
                 train_generator,
                 epochs=epochs,
-                steps_per_epoch=len(train_generator),
+                steps_per_epoch=steps_per_epoch,  # Manuel olarak sağlanan steps_per_epoch kullanılıyor
                 validation_data=test_generator,
                 callbacks=callbacks
             )

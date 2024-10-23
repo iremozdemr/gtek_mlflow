@@ -25,7 +25,7 @@ Below is an example of how to use the `train_model` function from the package wi
 import tensorflow as tf
 from tensorflow.keras import Input, Model
 from tensorflow.keras.layers import Conv3D, Flatten, Dense, Reshape, Concatenate
-from mlflowlib import train_model  
+from mlflowlib import training
 
 # Function to create a sample model
 def create_model(input_image_shape=(8, 670, 1413, 3), turbine_total_count=100):
@@ -90,13 +90,12 @@ training.train_model(
     experiment_name="Wind_Turbine_Prediction",
     batch_size=32,
     epochs=5,
-    device='/CPU:0',  # Use '/GPU:0' if you have a GPU available
     model=model
 )
 ```
 
 ```python
-from mlflowlib import train_model
+from mlflowlib import training
 
 training.train_model(
     run_name="example_run",
@@ -104,7 +103,6 @@ training.train_model(
     experiment_name="Wind_Turbine_Prediction",
     batch_size=32,
     epochs=5,
-    device='/CPU:0',  # Use '/GPU:0' if you have a GPU available
     model=model
 )
 ```
